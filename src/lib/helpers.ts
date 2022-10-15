@@ -1,4 +1,4 @@
-import type { Polygon, SideDetails, Size } from "postcards"
+import type { DoubleSidedSize, Polygon, SideDetails, Size } from "postcards"
 import { add_attribute } from "svelte/internal"
 
 export const imageDescription = (side: SideDetails): { description: string, locale: string | undefined } => {
@@ -22,15 +22,14 @@ export const imageDescription = (side: SideDetails): { description: string, loca
   return { description, locale }
 }
 
-export const cssSize = (size: Size, outer?: Size): string => {
-  let css = `width:${size.w}px;height:${size.h}px`
-  if (outer) {
-    const marginX = (outer.w - size.w) / 2
-    const marginY = (outer.h - size.h) / 2
-    css = `${css};margin:${marginY}px ${marginX}px`
-  }
+export const cssSize = (size: Size): string => `width:${size.w.toFixed(1)}px;height:${size.h.toFixed(1)}px`
 
-  return css
+export const cssSizeWithMargins = (sizes: DoubleSidedSize, front: boolean): string => {
+  const size = front ? sizes.front() : sizes.back()
+  const marginX = (sizes.outer().w - size.w) / 2
+  const marginY = (sizes.outer().h - size.h) / 2
+  
+  return `${cssSize(size)};margin:${marginY.toFixed(1)}px ${marginX.toFixed(1)}px`
 }
 
 const percentRe = /^(\d+)%$/

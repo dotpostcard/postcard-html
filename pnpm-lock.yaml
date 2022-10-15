@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@dotpostcard/postcards': ^0.4.0
+  '@dotpostcard/postcards': ^0.5.1
   '@sveltejs/vite-plugin-svelte': ^1.0.2
   '@tsconfig/svelte': ^3.0.0
   sass: ^1.55.0
@@ -12,7 +12,7 @@ specifiers:
   vite: ^3.1.0
 
 devDependencies:
-  '@dotpostcard/postcards': 0.4.0
+  '@dotpostcard/postcards': 0.5.1
   '@sveltejs/vite-plugin-svelte': 1.0.8_svelte@3.50.1+vite@3.1.4
   '@tsconfig/svelte': 3.0.0
   sass: 1.55.0
@@ -24,8 +24,8 @@ devDependencies:
 
 packages:
 
-  /@dotpostcard/postcards/0.4.0:
-    resolution: {integrity: sha512-n5EHMYGrHNTA9mQ3TKOYCdYqdwjWKcNi5Cx7ZkGPfAzOFMfc7Nidg2VI/JtTlr5ukW3A0SGJg4wMYcZCaeNXjQ==}
+  /@dotpostcard/postcards/0.5.1:
+    resolution: {integrity: sha512-fnaVAHqXLgYw26FDa5qW7DtRqJLsSAt0x4FJkrxzxWF0tm3/QZlDcnGRwETDIJpRSxQPf25HZz3HDlIjY846Sg==}
     dev: true
 
   /@esbuild/android-arm/0.15.10:

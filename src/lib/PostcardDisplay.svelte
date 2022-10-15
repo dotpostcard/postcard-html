@@ -3,7 +3,7 @@
 <script lang="ts">
   import { fetchPostcard } from '@dotpostcard/postcards'
   import { ShowSides } from './types'
-  import { imageDescription, cssSize, parsePercent, svgPoints } from './helpers'
+  import { imageDescription, cssSize, parsePercent, svgPoints, cssSizeWithMargins } from './helpers'
 
   // The source of the .postcard file to display
   export let src: string
@@ -33,6 +33,8 @@
       ...imageDescription(metadata[side]),
     }))
   )
+
+  const isFront = (i: number): boolean => sides[i] === ShowSides.FrontOnly
 </script>
 
 <style type="text/scss">
@@ -48,6 +50,11 @@
     backface-visibility: hidden;
     transition: transform 1s ease-out;
     transform-style: preserve-3d filter;
+
+    * {
+      width: 100%;
+      height: 100%;
+    }
 
     cursor: pointer;
     filter: drop-shadow(5px 5px 5px #777);
@@ -91,12 +98,12 @@
 {:then metadata}
   <div class="postcard flip-{metadata.flip}" class:flipped={flipped} on:click={() => flipped = !flipped} style={cssSize(metadata.size.outer())}>
 
-  {#each sideProms as sideProm}
-    <div class="side">
+  {#each sideProms as sideProm, i}
+    <div class="side" style={cssSizeWithMargins(metadata.size, isFront(i))}>
     {#await sideProm then side}
-      <img src={side.src} alt={side.description} lang={side.locale} style={cssSize(side.size, metadata.size.outer())} />
+      <img src={side.src} alt={side.description} lang={side.locale}} />
       {#if side.secrets.length > 0}
-        <svg style={cssSize(side.size, metadata.size.outer())}>
+        <svg>
           <defs>
             <linearGradient id="secret" x1="0" x2="2" y1="2" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="reflect" vector-effect="non-scaling-size">
               <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
@@ -111,7 +118,7 @@
         </svg>
       {/if}
     {:catch error}
-      <p style="color: red">Image: {error.message}</p>
+      <p>{error.message}</p>
     {/await}
     </div>
 
