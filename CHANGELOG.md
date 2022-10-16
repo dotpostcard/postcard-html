@@ -1,3 +1,21 @@
+# v0.3.3 (Sun Oct 16 2022)
+
+#### 🐛 Bug Fix
+
+- fix: Bump postcards-ts version ([@jphastings](https://github.com/jphastings))
+
+#### ⚠️ Pushed to `main`
+
+- docs: Link to example page ([@jphastings](https://github.com/jphastings))
+- docs: Deploy example page ([@jphastings](https://github.com/jphastings))
+- docs: Example URL that has CORS headers ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.3.2 (Sun Oct 16 2022)
 
 #### 🐛 Bug Fix
