@@ -17,7 +17,6 @@
   target?.addEventListener('postcard-loaded', (e: CustomEvent) => {
     metadata = e.detail.metadata
     showingSide = e.detail.showingSide
-    console.log(metadata)
   })
   target?.addEventListener('postcard-flipped', (e: CustomEvent) => showingSide = e.detail.showingSide)
 
@@ -37,4 +36,4 @@
 {#if size}<p><strong>Physical size (front):</strong> {size}</p>{/if}
 {#if metadata?.sentOn}<p><strong>Date:</strong> <time datetime={dateString(metadata?.sentOn)}>{dateString(metadata?.sentOn)}</time></p>{/if}
 
-{#if metadata?.location}<p><strong>Location:</strong> {metadata.location.name}</p>{/if}
+{#if metadata?.location?.name}<p><strong>Location:</strong> {metadata.location.name}</p>{/if}

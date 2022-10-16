@@ -38,8 +38,10 @@
   const pcProm = fetchPostcard(src)
   const metaProm = pcProm.then(({ metadata }: any) => metadata)
 
-  pcProm.then((pc: any) => { pc.metadata.size.setBounds((width || height) ? {w: width, h: height} : scalePc) })
-  metaProm.then((metadata) => dispatch('postcard-loaded', { name, metadata, showingSide: showingSide() }))
+  metaProm.then((metadata) => {
+    metadata.size.setBounds((width || height) ? {w: width, h: height} : scalePc)
+    dispatch('postcard-loaded', { name, metadata, showingSide: showingSide() })
+  })
 
   const sideProms = sides.map(side => pcProm
     .then((pc: any) => (pc[`${side}Data`].then(bytes => ({ metadata: pc.metadata, bytes }))))
@@ -73,7 +75,7 @@
     transition: transform 1s ease-out;
     transform-style: preserve-3d filter;
 
-    * {
+    & > * {
       width: 100%;
       height: 100%;
     }
