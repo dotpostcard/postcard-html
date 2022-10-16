@@ -1,3 +1,15 @@
+# v0.3.1 (Sun Oct 16 2022)
+
+#### 🐛 Bug Fix
+
+- fix: Now works with hard-specified sizes ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.3.0 (Sun Oct 16 2022)
 
 #### 🚀 Enhancement
