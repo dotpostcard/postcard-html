@@ -2,25 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Postcard web component demo</title>
-    <script type="module" src="/src/main.ts"></script>
+    <style>
+      section > * { margin: 16px; }
+      section { display: flex; }
+    </style>
   </head>
   <body>
     <section>
-      <p>This postcard has transparency, flips 'book' style, and has a secret section where the address should be. It is shown at a best-guess of 50% of <em>real world</em> size</p>
-      <postcard-display src="src/assets/hello.postcard" scale="50%"></postcard-display>
+      <postcard-display name="hello" src="src/assets/hello.postcard" scale="50%"></postcard-display>
+      <postcard-info for="hello"></postcard-info>
+    </section>
+
+    <section>
+      <postcard-display name="flip-book" src="src/assets/landscape-book.postcard" scale="25%"></postcard-display></li>
+      <div>
+        <p>A demonstration of a postcard that flips like a book</p>
+        <postcard-info for="flip-book"></postcard-info>
+      </div>
     </section>
     <section>
-      <p>These postcards illustrate the different methods of flipping:</p>
-      <ul>
-        <style>li { margin: 50px 0; }</style>
-        <li>Book: <postcard-display src="src/assets/landscape-book.postcard" scale="25%"></postcard-display></li>
-        <li>Calendar: <postcard-display src="src/assets/landscape-calendar.postcard" scale="25%"></postcard-display></li>
-        <li>Left-hand: <postcard-display src="src/assets/landscape-left-hand.postcard" scale="25%"></postcard-display></li>
-        <li>Right-hand: <postcard-display src="src/assets/landscape-right-hand.postcard" scale="25%"></postcard-display></li>
-      </ul>
+      <postcard-display name="flip-calendar" src="src/assets/landscape-calendar.postcard" scale="25%"></postcard-display></li>
+      <div>
+        <p>A demonstration of a postcard that flips like a calendar</p>
+        <postcard-info for="flip-calendar"></postcard-info>
+      </div>
     </section>
+    <section>
+      <postcard-display name="flip-left-hand" src="src/assets/landscape-left-hand.postcard" scale="25%"></postcard-display></li>
+      <div>
+        <p>A demonstration of a postcard that flips like a book</p>
+        <postcard-info for="flip-left-hand"></postcard-info>
+      </div>
+    </section>
+    <section>
+      <postcard-display name="flip-right-hand" src="src/assets/landscape-right-hand.postcard" scale="25%"></postcard-display></li>
+      <div>
+        <p>A demonstration of a postcard that flips like a book</p>
+        <postcard-info for="flip-right-hand"></postcard-info>
+      </div>
+    </section>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

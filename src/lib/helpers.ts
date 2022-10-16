@@ -1,26 +1,30 @@
-import type { DoubleSidedSize, Polygon, SideDetails, Size } from "postcards"
-import { add_attribute } from "svelte/internal"
+import type { LocalizedText, DoubleSidedSize, Polygon, SideDetails, Size, Locale } from "@dotpostcard/postcards"
 
-export const imageDescription = (side: SideDetails): { description: string, locale: string | undefined } => {
+export const localizedText = (obj: LocalizedText, preferOriginal: boolean = true): [text: string, locale: Locale] => obj.pickBest(Navigator.languages, preferOriginal)
+
+export const imageDescription = (side: SideDetails): [text: string, locale: Locale] => {
   let description: string = ""
   let locale: string | undefined
 
   if (side.description) {
-    const [desText, _] = side.description.pickBest(Navigator.languages)
+    const [desText, desLocale] = localizedText(side.description, false)
     description += desText
+    locale = desLocale
   }
   if (side.transcription) {
-    const [traText, traLocale] = side.transcription.pickBest(Navigator.languages, true)
+    const [traText, traLocale] = localizedText(side.transcription, true)
 
     if (description.length > 0) {
-      description += ': '
+      description += "\n"
     }
     description += traText
-    locale = traLocale
+    locale ||= traLocale
   }
 
-  return { description, locale }
+  return [description, locale]
 }
+
+export const dateString = (date: Date): string => date.toISOString().replace(/T.*$/, '')
 
 export const cssSize = (size: Size): string => `width:${size.w.toFixed(1)}px;height:${size.h.toFixed(1)}px`
 
