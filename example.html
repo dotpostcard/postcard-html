@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Example of postcards web components</title>
+    <script type="module" src="https://unpkg.com/@dotpostcard/postcards-html"></script>
+  </head>
+<body>
+<style>
+  .centered {
+    position: fixed;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+  }
+
+  .centered > * {
+    margin: 8px;
+  }
+</style>
+<div class="centered">
+  <postcard-display name="toledo" src="https://raw.githubusercontent.com/dotpostcard/postcards-go/main/fixtures/hello.postcard" height="400"></postcard-display>
+  <postcard-info for="toledo"></postcard-info>
+</div>
+</body>
+</html>
