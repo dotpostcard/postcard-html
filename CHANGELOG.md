@@ -1,3 +1,15 @@
+# v0.4.0 (Fri Oct 21 2022)
+
+#### 🚀 Enhancement
+
+- feat: Show nice error ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.3.3 (Sun Oct 16 2022)
 
 #### 🐛 Bug Fix
