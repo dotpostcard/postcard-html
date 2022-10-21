@@ -2,11 +2,15 @@
 
 <script lang="ts">
   import type { Metadata } from "@dotpostcard/postcards";
-    import { transition_in } from "svelte/internal";
   import { dateString, localizedText } from "./helpers";
 
+  export let downloadable: boolean = false
   // instead of `export let for: string` because for is a protected word, and can't be a variable name
   let { for: targetName } = $$props;
+
+  const showDownloadLink = (
+    typeof downloadable === 'boolean'
+  ) ? downloadable : true
 
   const target = document.querySelector(`postcard-display[name="${targetName}"`)
   if (!target) {
@@ -42,3 +46,5 @@
   {#if description}<p lang={description[1]}><strong>Description:</strong> {description[0]}</p>{/if}
   {#if transcription}<p lang={transcription[1]}><strong>Transcription:</strong> {transcription[0]}</p>{/if}
 {/if}
+
+{#if showDownloadLink}<a href={target.src}>Download postcard</a>{/if}

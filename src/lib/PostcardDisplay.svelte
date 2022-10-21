@@ -3,9 +3,10 @@
 <script lang="ts">
   import { fetchPostcard } from '@dotpostcard/postcards'
   import { ShowSides } from './types'
-  import { imageDescription, cssSize, parsePercent, svgPoints, cssSizeWithMargins, localizedText } from './helpers'
+  import { imageDescription, cssSize, parsePercent, svgPoints, cssSizeWithMargins } from './helpers'
   import { createEventDispatcher } from "svelte"
   import { get_current_component } from "svelte/internal"
+  import ErrorSVG from "../assets/error.svg"
 
   // The source of the .postcard file to display
   export let src: string
@@ -50,7 +51,10 @@
       size: side === 'front' ? metadata.size.front() : metadata.size.back(),
       secrets: metadata[side].secrets || [],
       description: imageDescription(metadata[side]),
-    }))
+    })).catch((e) => {
+      console.error(e)
+      throw e
+    })
   )
 
   const showingSide = (i: number = flipped ? 1 : 0): ShowSides => sides[i] as ShowSides
@@ -81,9 +85,9 @@
     }
 
     cursor: pointer;
-    filter: drop-shadow(5px 5px 5px #777);
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
 
-    svg {
+    .secrets {
       position: absolute;
       top: 0;
       left: 0;
@@ -95,6 +99,25 @@
         &:hover {
           opacity: 1;
         }
+      }
+    }
+
+    .error {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: 2%;
+      border: 2px dashed rgb(213, 161, 161);
+      background-color: #f8f7f6;
+      padding: 2% 4%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      svg {
+        max-width: 128px;
+        stroke: rgb(213, 161, 161);
       }
     }
   }
@@ -126,7 +149,7 @@
       {#await sideProm then side}
         <img src={side.src} alt={side.description[0]} lang={side.description[1]} />
         {#if side.secrets.length > 0}
-          <svg>
+          <svg class="secrets">
             <defs>
               <linearGradient id="secret" x1="0" x2="2" y1="2" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="reflect" vector-effect="non-scaling-size">
                 <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
@@ -141,7 +164,7 @@
           </svg>
         {/if}
       {:catch error}
-        <p>{error.message}</p>
+          <div class="error"><ErrorSVG /></div>
       {/await}
       </div>
 
