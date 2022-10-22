@@ -1,3 +1,15 @@
+# v0.5.0 (Sat Oct 22 2022)
+
+#### 🚀 Enhancement
+
+- feat: Use CSS sizing instead ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.4.0 (Fri Oct 21 2022)
 
 #### 🚀 Enhancement
