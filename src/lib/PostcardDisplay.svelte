@@ -34,11 +34,12 @@
   const bytesToUrl = (bytes: Uint8Array): string => URL.createObjectURL(new Blob([bytes]))
   const logError = (e) => { console.error(e); throw e }
   const setAspectRatio = (metadata) => {
-    const [a, b] = metadata.size.aspectRatio(isFront())
+    const [a, b] = metadata.size.aspectRatio(true)
     component.style.setProperty('--frontAR', `${a}/${b}`)
     component.style.setProperty('--backAR', metadata.size.isHeteroriented ? '1/1' : `${a}/${b}`)
-    component.style.aspectRatio = 'var(--frontAR)'
+    ensureAspectRatioForFlip()
   }
+  const ensureAspectRatioForFlip = () => component.style.aspectRatio = isFront() ? 'var(--frontAR)' : 'var(--backAR)'
 
   const pcProm = fetchPostcard(src)
   const metaProm = pcProm.then(({ metadata }: any) => metadata).catch(logError)
@@ -59,11 +60,12 @@
 
   const showingSide = (side: number = flipped ? 1 : 0): ShowSides => sides[side] as ShowSides
   const isFront = (side: number = flipped ? 1 : 0): boolean => showingSide(side) === ShowSides.FrontOnly
-  const doFlip = () => {
+  const shouldFlip = sides.length === 2
+  const doFlip = shouldFlip && (() => {
     flipped = !flipped
-    component.style.aspectRatio = flipped ? 'var(--backAR)' : 'var(--frontAR)'
+    ensureAspectRatioForFlip()
     dispatch('postcard-flipped', { name, showingSide: showingSide() })
-  }
+  })
 </script>
 
 <style type="text/scss">
@@ -90,14 +92,16 @@
     backface-visibility: hidden;
     transition: transform 1s ease-out;
     transform-style: preserve-3d;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
+
+    &.flippable {
+      cursor: pointer;
+    }
 
     & > * {
       width: 100%;
       height: 100%;
     }
-
-    cursor: pointer;
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.45));
 
     .secrets {
       position: absolute;
@@ -157,7 +161,7 @@
   <div class="postcard flip-{metadata.flip}" class:flipped={flipped}>
 
     {#each sideProms as sideProm, i}
-      <div class="side" style={!isFront(i) && styleToCss(metadata.size.css(false))} on:click={doFlip}>
+      <div class="side{shouldFlip ? ' flippable' :''}" style={!isFront(i) && styleToCss(metadata.size.css(false))} on:click={doFlip}>
       {#await sideProm then side}
         <img src={side.src} alt={side.description[0]} lang={side.description[1]} />
         {#if side.secrets.length > 0}
