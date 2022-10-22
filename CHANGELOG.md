@@ -1,3 +1,19 @@
+# v0.5.2 (Sat Oct 22 2022)
+
+#### 🐛 Bug Fix
+
+- fix: Ratios for back-first ([@jphastings](https://github.com/jphastings))
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/dotpostcard/postcards-html ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.5.1 (Sat Oct 22 2022)
 
 #### 🐛 Bug Fix
