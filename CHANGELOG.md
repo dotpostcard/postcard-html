@@ -1,3 +1,15 @@
+# v0.5.1 (Sat Oct 22 2022)
+
+#### 🐛 Bug Fix
+
+- fix: Allow postcards to grow in size as they flip ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.5.0 (Sat Oct 22 2022)
 
 #### 🚀 Enhancement
