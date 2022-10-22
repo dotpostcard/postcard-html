@@ -22,7 +22,7 @@
   },
   "homepage": "https://dotpostcard.org/libs/html",
   "devDependencies": {
-    "@dotpostcard/postcards": "^0.7.2",
+    "@dotpostcard/postcards": "^0.8.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.2",
     "@tsconfig/svelte": "^3.0.0",
     "sass": "^1.55.0",
@@ -31,7 +31,8 @@
     "svelte-preprocess": "^4.10.7",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
-    "vite-plugin-svelte-svg": "^2.0.2"
+    "vite-plugin-svelte-svg": "^2.0.2",
+    "style-object-to-css-string": "^1.0.1"
   },
   "publishConfig": {
     "access": "public"
