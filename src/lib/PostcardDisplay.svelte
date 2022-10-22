@@ -33,16 +33,18 @@
 
   const bytesToUrl = (bytes: Uint8Array): string => URL.createObjectURL(new Blob([bytes]))
   const logError = (e) => { console.error(e); throw e }
+  const setAspectRatio = (metadata) => {
+    const [a, b] = metadata.size.aspectRatio(isFront())
+    component.style.setProperty('--frontAR', `${a}/${b}`)
+    component.style.setProperty('--backAR', metadata.size.isHeteroriented ? '1/1' : `${a}/${b}`)
+    component.style.aspectRatio = 'var(--frontAR)'
+  }
 
   const pcProm = fetchPostcard(src)
   const metaProm = pcProm.then(({ metadata }: any) => metadata).catch(logError)
 
   metaProm.then((metadata) => {
-    let a = 1, b = 1
-    if (!metadata.size.isHeteroriented) {
-      [a, b] = metadata.size.aspectRatio(isFront())
-    }
-    component.style.aspectRatio = `${a} / ${b}`
+    setAspectRatio(metadata)
     dispatch('postcard-loaded', { name, metadata, showingSide: showingSide() })
   })
 
@@ -59,6 +61,7 @@
   const isFront = (side: number = flipped ? 1 : 0): boolean => showingSide(side) === ShowSides.FrontOnly
   const doFlip = () => {
     flipped = !flipped
+    component.style.aspectRatio = flipped ? 'var(--backAR)' : 'var(--frontAR)'
     dispatch('postcard-flipped', { name, showingSide: showingSide() })
   }
 </script>
@@ -68,6 +71,7 @@
     display: block;
     width:100%;
     height: 100%;
+    transition: aspect-ratio 1s ease-out;
   }
 
   .postcard {
@@ -153,7 +157,7 @@
   <div class="postcard flip-{metadata.flip}" class:flipped={flipped}>
 
     {#each sideProms as sideProm, i}
-      <div class="side" style={styleToCss(metadata.size.css(isFront(i)))} on:click={doFlip}>
+      <div class="side" style={!isFront(i) && styleToCss(metadata.size.css(false))} on:click={doFlip}>
       {#await sideProm then side}
         <img src={side.src} alt={side.description[0]} lang={side.description[1]} />
         {#if side.secrets.length > 0}
