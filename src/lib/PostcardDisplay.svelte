@@ -83,7 +83,14 @@
     perspective: 1000px;
     display: inline-block;
     width: 100%;
-    height: 100%;
+
+    &.flip-book,&.flip-calendar {
+      height: 100%;
+    }
+
+    &.flip-right-hand,&.flip-left-hand {
+      aspect-ratio: 1 / 1;
+    }
   }
 
   .side {
@@ -163,9 +170,9 @@
   <div class="postcard flip-{metadata.flip}" class:flipped={flipped}>
 
     {#each sideProms as sideProm, i}
-      <div class="side{shouldFlip ? ' flippable' :''}" style={isPortrait(metadata.size, isFront(i)) ? styleToCss(metadata.size.css(isFront(i))) : undefined} on:click={doFlip}>
+      <div class="side{shouldFlip ? ' flippable' :''}" style={styleToCss(metadata.size.css(isFront(i)))} on:click={doFlip}>
       {#await sideProm then side}
-        <img src={side.src} alt={side.description[0]} lang={side.description[1]} />
+        <img src={side.src} alt={side.description} lang={metadata.locale} />
         {#if side.secrets.length > 0}
           <svg class="secrets" viewBox="0 0 1 1">
             <defs>

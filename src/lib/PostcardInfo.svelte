@@ -47,4 +47,4 @@
   {#if transcription}<p lang={metadata.locale}><strong>Transcription:</strong> {transcription}</p>{/if}
 {/if}
 
-{#if showDownloadLink}<a href={target.src}>Download postcard</a>{/if}
+{#if showDownloadLink}<a href={target?.getAttribute('src')}>Download postcard</a>{/if}
