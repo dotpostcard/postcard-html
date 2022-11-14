@@ -1,3 +1,19 @@
+# v0.6.0 (Mon Nov 14 2022)
+
+#### 🚀 Enhancement
+
+- feat: Swap to new text format ([@jphastings](https://github.com/jphastings))
+
+#### 🐛 Bug Fix
+
+- fix: Portrait-front postcards work now ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.5.2 (Sat Oct 22 2022)
 
 #### 🐛 Bug Fix
