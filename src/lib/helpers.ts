@@ -1,27 +1,8 @@
-import type { LocalizedText, Polygon, SideDetails, Locale } from "@dotpostcard/postcards"
+import type { Polygon, SideDetails, Locale, Size } from "@dotpostcard/postcards"
 
-export const localizedText = (obj: LocalizedText, preferOriginal: boolean = true): [text: string, locale: Locale] => obj.pickBest(Navigator.languages, preferOriginal)
-
-export const imageDescription = (side: SideDetails): [text: string, locale: Locale] => {
-  let description: string = ""
-  let locale: string | undefined
-
-  if (side.description) {
-    const [desText, desLocale] = localizedText(side.description, false)
-    description += desText
-    locale = desLocale
-  }
-  if (side.transcription) {
-    const [traText, traLocale] = localizedText(side.transcription, true)
-
-    if (description.length > 0) {
-      description += "\n"
-    }
-    description += traText
-    locale ||= traLocale
-  }
-
-  return [description, locale]
+export const isPortrait = (size: Size, isFront: boolean):boolean => {
+  const [a, b] = size.aspectRatio(isFront)
+  return b > a
 }
 
 export const dateString = (date: Date): string => date.toISOString().replace(/T.*$/, '')

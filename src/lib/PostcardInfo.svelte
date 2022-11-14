@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import type { Metadata } from "@dotpostcard/postcards";
-  import { dateString, localizedText } from "./helpers";
+  import { dateString } from "./helpers";
 
   export let downloadable: boolean = false
   // instead of `export let for: string` because for is a protected word, and can't be a variable name
@@ -25,15 +25,15 @@
   })
   target?.addEventListener('postcard-flipped', (e: CustomEvent) => showingSide = e.detail.showingSide)
 
-  $: context = metadata?.context?.description && localizedText(metadata.context.description)
+  $: context = metadata?.context?.description && metadata.context.description
   $: size = metadata?.size?.physical
 
   $: side = metadata && metadata[showingSide]
-  $: description = side?.description && localizedText(side.description, false)
-  $: transcription = side?.transcription && localizedText(side.transcription, true)
+  $: description = side?.description && side.description
+  $: transcription = side?.transcription && side.transcription
 </script>
 
-{#if context}<p lang={context[1]}><strong>Context:</strong> {context[0]}</p>{/if}
+{#if context}<p lang={metadata.locale}><strong>Context:</strong> {context}</p>{/if}
 
 {#if size}<p><strong>Physical size (front):</strong> {size}</p>{/if}
 {#if metadata?.sentOn}<p><strong>Date:</strong> <time datetime={dateString(metadata?.sentOn)}>{dateString(metadata?.sentOn)}</time></p>{/if}
@@ -43,8 +43,8 @@
 {#if description || transcription}
   On the {showingSide}:
 
-  {#if description}<p lang={description[1]}><strong>Description:</strong> {description[0]}</p>{/if}
-  {#if transcription}<p lang={transcription[1]}><strong>Transcription:</strong> {transcription[0]}</p>{/if}
+  {#if description}<p lang={metadata.locale}><strong>Description:</strong> {description}</p>{/if}
+  {#if transcription}<p lang={metadata.locale}><strong>Transcription:</strong> {transcription}</p>{/if}
 {/if}
 
 {#if showDownloadLink}<a href={target.src}>Download postcard</a>{/if}

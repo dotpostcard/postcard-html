@@ -4,7 +4,7 @@
   import { fetchPostcard } from '@dotpostcard/postcards'
   import styleToCss from 'style-object-to-css-string'
   import { ShowSides } from './types'
-  import { imageDescription, svgPoints } from './helpers'
+  import { isPortrait, svgPoints } from './helpers'
   import { createEventDispatcher } from "svelte"
   import { get_current_component } from "svelte/internal"
   import ErrorSVG from "../assets/error.svg"
@@ -35,8 +35,10 @@
   const logError = (e) => { console.error(e); throw e }
   const setAspectRatio = (metadata) => {
     const [a, b] = metadata.size.aspectRatio(true)
-    component.style.setProperty('--frontAR', `${a}/${b}`)
-    component.style.setProperty('--backAR', metadata.size.isHeteroriented ? '1/1' : `${a}/${b}`)
+    const frontNeedsPadding = isPortrait(metadata.size, true) && metadata.size.isHeteroriented
+    const backNeedsPadding = isPortrait(metadata.size, false) && metadata.size.isHeteroriented
+    component.style.setProperty('--frontAR', frontNeedsPadding ? '1/1' : `${a}/${b}`)
+    component.style.setProperty('--backAR', backNeedsPadding ? '1/1' : `${a}/${b}`)
     ensureAspectRatioForFlip()
   }
   const ensureAspectRatioForFlip = () => component.style.aspectRatio = isFront() ? 'var(--frontAR)' : 'var(--backAR)'
@@ -54,7 +56,7 @@
     .then(({metadata, bytes}) => ({
       src: bytesToUrl(bytes),
       secrets: metadata[side].secrets || [],
-      description: imageDescription(metadata[side]),
+      description: metadata[side].description,
     })).catch(logError)
   )
 
@@ -161,11 +163,11 @@
   <div class="postcard flip-{metadata.flip}" class:flipped={flipped}>
 
     {#each sideProms as sideProm, i}
-      <div class="side{shouldFlip ? ' flippable' :''}" style={!isFront(i) && styleToCss(metadata.size.css(false))} on:click={doFlip}>
+      <div class="side{shouldFlip ? ' flippable' :''}" style={isPortrait(metadata.size, isFront(i)) ? styleToCss(metadata.size.css(isFront(i))) : undefined} on:click={doFlip}>
       {#await sideProm then side}
         <img src={side.src} alt={side.description[0]} lang={side.description[1]} />
         {#if side.secrets.length > 0}
-          <svg class="secrets" viewbox="0 0 1 1">
+          <svg class="secrets" viewBox="0 0 1 1">
             <defs>
               <linearGradient id="secret" x1="0" x2="0.01" y1="0.01" y2="0" gradientUnits="userSpaceOnUse" spreadMethod="reflect" vector-effect="non-scaling-size">
                 <stop offset="0%" stop-color="rgba(255,255,255,0.2)" />
