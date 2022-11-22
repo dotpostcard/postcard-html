@@ -1,3 +1,15 @@
+# v0.6.1 (Tue Nov 22 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Use local postcard for example ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.6.0 (Mon Nov 14 2022)
 
 #### 🚀 Enhancement
