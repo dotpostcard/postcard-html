@@ -1,3 +1,15 @@
+# v0.6.3 (Tue Nov 22 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Actually fix the URL ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.6.2 (Tue Nov 22 2022)
 
 #### ⚠️ Pushed to `main`
