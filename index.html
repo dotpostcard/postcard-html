@@ -10,8 +10,10 @@
     </style>
   </head>
   <body>
+    <p>Run <code>pnpm dev</code> to use this file with a live reloading build.</p>
+
     <section>
-      <postcard-display name="hello" src="src/assets/hello.postcard" style="width: 400px"></postcard-display>
+      <postcard-display name="hello" src="src/assets/hello.postcard" style="width: 200px"></postcard-display>
       <postcard-info for="hello" downloadable></postcard-info>
     </section>
 
@@ -69,6 +71,13 @@
       <div>
         <p>A demonstration of a portrait postcard that flips like a book</p>
         <postcard-info for="portrait-flip-right-hand"></postcard-info>
+      </div>
+    </section>
+
+    <section>
+      <img src="src/assets/hello.postcard" style="width: 200px" />
+      <div>
+        <p>A postcard file loaded as an image</p>  
       </div>
     </section>
     <script type="module" src="/src/main.ts"></script>
