@@ -1,3 +1,19 @@
+# v0.7.0 (Thu Aug 24 2023)
+
+#### 🚀 Enhancement
+
+- feat: Support v0.11 postcard files ([@jphastings](https://github.com/jphastings))
+
+#### ⚠️ Pushed to `main`
+
+- Update hello.postcard ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.6.3 (Tue Nov 22 2022)
 
 #### ⚠️ Pushed to `main`
