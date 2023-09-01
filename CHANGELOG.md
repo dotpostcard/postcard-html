@@ -1,3 +1,15 @@
+# v0.7.2 (Fri Sep 01 2023)
+
+#### 🐛 Bug Fix
+
+- fix: Bump version of @dotpostcard/postcards ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.7.1 (Fri Sep 01 2023)
 
 #### 🐛 Bug Fix
