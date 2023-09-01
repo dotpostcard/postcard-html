@@ -1,3 +1,15 @@
+# v0.7.1 (Fri Sep 01 2023)
+
+#### 🐛 Bug Fix
+
+- fix: Use v0.9.0 of Typescript library ([@jphastings](https://github.com/jphastings))
+
+#### Authors: 1
+
+- JP Hastings-Spital ([@jphastings](https://github.com/jphastings))
+
+---
+
 # v0.7.0 (Thu Aug 24 2023)
 
 #### 🚀 Enhancement
