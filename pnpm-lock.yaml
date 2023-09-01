@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@dotpostcard/postcards':
-    specifier: ^0.8.0
-    version: 0.8.0
+    specifier: ^0.9.0
+    version: 0.9.0
   '@sveltejs/vite-plugin-svelte':
     specifier: ^1.4.0
     version: 1.4.0(svelte@3.59.2)(vite@3.2.7)
@@ -41,8 +41,8 @@ devDependencies:
 
 packages:
 
-  /@dotpostcard/postcards@0.8.0:
-    resolution: {integrity: sha512-33jP4moheKpYqhvIVEPFRSewAxJrWYrbJeU63r4D5kmzgB9DeGpOoHkqRuFzuc4/7v3446U4Je3sn4YUYKfR9w==}
+  /@dotpostcard/postcards@0.9.0:
+    resolution: {integrity: sha512-l7qUOscsMXa0N2KvEuZAV/N2R8Mrlw0oVyM2lD1S1IGlAavq314/Ie85QCPVvGHmrjl9PnnHdxWeIESb5qD8IQ==}
     dev: true
 
   /@esbuild/android-arm@0.15.18:
