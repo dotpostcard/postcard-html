@@ -11,6 +11,8 @@
 
   // The source of the .postcard file to display
   export let src: string
+  if (!src) throw new Error('src is required')
+
   // The name of the element, used exclusively for allowing automatic referencing 
   export let name: string | undefined = undefined
   export let show: ShowSides = ShowSides.BothFrontFirst
